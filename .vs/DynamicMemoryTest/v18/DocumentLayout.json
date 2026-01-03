@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Owner\\source\\repos\\DynamicMemoryTest\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C7D1106F-CFBC-4F9A-AA65-DCF8B737D137}|DynamicMemoryTest\\DynamicMemoryTest.csproj|c:\\users\\owner\\source\\repos\\dynamicmemorytest\\dynamicmemorytest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7D1106F-CFBC-4F9A-AA65-DCF8B737D137}|DynamicMemoryTest\\DynamicMemoryTest.csproj|solutionrelative:dynamicmemorytest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Owner\\source\\repos\\DynamicMemoryTest\\DynamicMemoryTest\\Program.cs",
+              "RelativeDocumentMoniker": "DynamicMemoryTest\\Program.cs",
+              "ToolTip": "C:\\Users\\Owner\\source\\repos\\DynamicMemoryTest\\DynamicMemoryTest\\Program.cs",
+              "RelativeToolTip": "DynamicMemoryTest\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-03T12:24:28.306Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

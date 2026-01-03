@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 class Program
 {
@@ -70,13 +71,28 @@ class Program
 
         Console.WriteLine("✅ Generation done. Building project...");
 
+        int exitCode = 1;
         var sw = Stopwatch.StartNew();
-        int exitCode = Run("dotnet", "build -c Release", projDir);
-        sw.Stop();
+        try
+        {
+            exitCode = Run("dotnet", "build -c Release", projDir);
+            sw.Stop();
 
-        Console.WriteLine($"Build completed in {sw.Elapsed}. Exit code: {exitCode}");
-        Console.WriteLine($"Source directory: {projDir}");
-        Console.WriteLine($"(Remove manually when done.)");
+            Console.WriteLine($"Build completed in {sw.Elapsed}. Exit code: {exitCode}");
+            Console.WriteLine($"Source directory: {projDir}");
+            Console.WriteLine("(Temporary directory will be removed now.)");
+        }
+        catch (Exception ex)
+        {
+            sw.Stop();
+            Console.Error.WriteLine($"Build failed with exception: {ex}");
+            // exitCode already set to non-zero
+        }
+        finally
+        {
+            // Attempt to delete the temporary work directory (retry a few times if files are still in use)
+            TryDeleteDirectoryWithRetries(workDir, maxRetries: 5, delayMs: 500);
+        }
 
         return exitCode;
     }
@@ -97,5 +113,37 @@ class Program
         p.BeginErrorReadLine();
         p.WaitForExit();
         return p.ExitCode;
+    }
+
+    static void TryDeleteDirectoryWithRetries(string path, int maxRetries = 3, int delayMs = 200)
+    {
+        if (string.IsNullOrEmpty(path) || !Directory.Exists(path))
+            return;
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                Directory.Delete(path, true);
+                Console.WriteLine($"Deleted temporary directory: {path}");
+                return;
+            }
+            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException)
+            {
+                if (attempt == maxRetries)
+                {
+                    Console.Error.WriteLine($"Failed to delete temporary directory '{path}' after {maxRetries} attempts: {ex.Message}");
+                    return;
+                }
+
+                // small backoff before retry
+                Thread.Sleep(delayMs);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Unexpected error deleting temporary directory '{path}': {ex}");
+                return;
+            }
+        }
     }
 }
